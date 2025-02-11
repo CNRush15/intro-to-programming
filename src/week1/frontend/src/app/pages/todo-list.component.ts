@@ -31,7 +31,7 @@ export class TodoListComponent {
       id: '99',
       completed: false,
       createdOn: '2025-02-11T20:58:47.300Z',
-      description: 'Shovel Snow',
+      description: 'Shovel Snow', //yes
     },
     {
       id: '100',
