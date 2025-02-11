@@ -31,3 +31,6 @@ app.UseAuthorization();
 app.MapTodos();
 
 app.Run();
+
+
+public partial class Program { }

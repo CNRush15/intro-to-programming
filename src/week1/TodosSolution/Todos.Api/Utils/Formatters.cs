@@ -2,8 +2,14 @@
 
 public class Formatters
 {
-    public string FormatName(string firstName, string lastName)
+    // method that takes two strings and returns a string
+    public static string FormatName(string firstName, string lastName)
     {
-        return firstName + " " + lastName;
+        return $"{lastName}, {firstName}";
+    }
+
+    public static bool IsLongName(string name)
+    {
+        return name.Length > 10;
     }
 }
