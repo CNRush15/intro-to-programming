@@ -19,6 +19,17 @@ public class MakingWithdrawals
         Assert.Equal(openingBalance - amountToWithdraw,
             account.GetBalance());
     }
+  
+    [Fact]
+
+    public void CannotMakeWithdrawalWithNegativeNumbers()
+
+    {
+        var account = new Account();
+
+        Assert.Throws<AccountNegativeTransactionAmountException>(() => account.Withdraw(-3));
+    }
+
 
     [Fact]
     public void CanWithdrawFullBalance()
@@ -35,10 +46,30 @@ public class MakingWithdrawals
 
         var account = new Account();
         var openingBalance = account.GetBalance();
-        var amountToWithdraw = openingBalance + .01M;
+        var amountThatRepresentsMorethanOpeningBalance = openingBalance + .01M;
 
-        account.Withdraw(amountToWithdraw);
+        try
+        {
+        account.Withdraw(amountThatRepresentsMorethanOpeningBalance);
+
+        }
+        catch (AccountTransactionException)
+        {
+
+        }
 
         Assert.Equal(openingBalance, account.GetBalance());
+    }
+
+    [Fact]
+    public void WhenOverDraftmethodThrows()
+    {
+        var account = new Account();
+        var openingBalance = account.GetBalance();
+        var amountThatRepresentsMorethanOpeningBalance = openingBalance + .01M;
+
+   
+
+        Assert.Throws<AccountOverdraftException>(() => account.Withdraw(amountThatRepresentsMorethanOpeningBalance));
     }
 }
