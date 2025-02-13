@@ -1,6 +1,4 @@
-﻿
-
-using Banking.Domain;
+﻿using Banking.Domain;
 
 namespace Banking.Tests.Accounts;
 public class MakingDeposits
@@ -10,7 +8,7 @@ public class MakingDeposits
     public void MakingADepositIncreasesBalance()
     {
         // given
-        var account = new Account(); 
+        var account = new Account(); // <--- _balance = 5000
         var openingBalance = account.GetBalance();
         var amountToDeposit = 100.10M;
 
@@ -25,5 +23,13 @@ public class MakingDeposits
 
         Assert.Equal(amountToDeposit + openingBalance, account.GetBalance());
 
+    }
+
+    [Fact]
+    public void CannotDepositNegativeNumbers()
+    {
+        var account = new Account();
+
+        Assert.Throws<AccountNegativeTransactionAmountException>(() => account.Deposit(-1));
     }
 }
