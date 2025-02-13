@@ -1,5 +1,7 @@
-﻿using Banking.Domain;
+﻿
 
+
+using Banking.Domain;
 
 namespace Banking.Tests.TestDoubles;
 public class DummyBonusCalculator : ICalculateBonusesForDepositsOnAccounts

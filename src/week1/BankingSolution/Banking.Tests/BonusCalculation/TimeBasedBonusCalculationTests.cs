@@ -1,4 +1,6 @@
-﻿using Banking.Domain;
+﻿
+using Banking.Domain;
+using NSubstitute;
 
 namespace Banking.Tests.BonusCalculation;
 public class TimeBasedBonusCalculatorTests
@@ -10,7 +12,9 @@ public class TimeBasedBonusCalculatorTests
 
     public void BonusesThatMeetThresholdGetBonusIfDuringBusinessHours(decimal balance, decimal depositAmount, decimal expectedBonus)
     {
-        var bonusCalculator = new TimeBoundBonusCalculator();
+        var stubbedBusinessClock = Substitute.For<IProvideTheBusinessClockForBonusCalculation>();
+        stubbedBusinessClock.WeAreCurrentlyDuringBusinessHours().Returns(true);
+        var bonusCalculator = new TimeBoundBonusCalculator(stubbedBusinessClock);
 
         decimal bonus = bonusCalculator.CalculateBonusForDeposit(balance, depositAmount);
 
@@ -26,7 +30,9 @@ public class TimeBasedBonusCalculatorTests
 
     public void BonusesThatMeetThresholdGetNoBonusOutsideBusinessHours(decimal balance, decimal depositAmount, decimal expectedBonus)
     {
-        var bonusCalculator = new TimeBoundBonusCalculator();
+        var stubbedBusinessClock = Substitute.For<IProvideTheBusinessClockForBonusCalculation>();
+        stubbedBusinessClock.WeAreCurrentlyDuringBusinessHours().Returns(false);
+        var bonusCalculator = new TimeBoundBonusCalculator(stubbedBusinessClock);
 
         decimal bonus = bonusCalculator.CalculateBonusForDeposit(balance, depositAmount);
 
@@ -40,7 +46,10 @@ public class TimeBasedBonusCalculatorTests
 
     public void BonusesBelowThresholdGetnoBonus(decimal balance, decimal depositAmount, decimal expectedBonus)
     {
-        var bonusCalculator = new TimeBoundBonusCalculator();
+        var stubbedBusinessClock = Substitute.For<IProvideTheBusinessClockForBonusCalculation>();
+        stubbedBusinessClock.WeAreCurrentlyDuringBusinessHours().Returns(true);
+        var bonusCalculator = new TimeBoundBonusCalculator(stubbedBusinessClock);
+
 
         decimal bonus = bonusCalculator.CalculateBonusForDeposit(balance, depositAmount);
 

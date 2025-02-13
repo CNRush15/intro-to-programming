@@ -1,4 +1,6 @@
-﻿using Banking.Domain;
+﻿
+
+using Banking.Domain;
 
 namespace Banking.Tests.BonusCalculation;
 public class StandardBonusCalculatorTests

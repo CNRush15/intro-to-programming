@@ -1,4 +1,5 @@
-﻿using Banking.Domain;
+﻿
+using Banking.Domain;
 using Banking.Tests.TestDoubles;
 using NSubstitute;
 

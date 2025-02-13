@@ -1,4 +1,6 @@
 ﻿
+
+
 namespace Banking.Domain;
 
 
@@ -52,3 +54,4 @@ public class Account
         }
     }
 }
+
