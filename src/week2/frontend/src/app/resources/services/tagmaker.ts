@@ -1,11 +1,11 @@
 export function tagMaker(tagList: string): string[] {
-    // Split the input string into words, convert to lowercase, and filter out duplicates
-    const uniqueTags = Array.from(new Set(
-        tagList
-            .toLowerCase() // Convert to lowercase
-            .split(' ')    // Split by spaces
-            .filter(tag => tag) // Remove empty strings
-    ));
+  // split the string into an array with, get rid of empty strings, no duplicates, converted to lower case
+  //  return tagList.split(' ').filter((tag, index, self) => tag && self.indexOf(tag) === index).map(tag => tag.toLowerCase());
+  const parts = tagList
+    .split(' ')
+    .filter((t) => t !== '')
+    .map((t) => t.trim())
+    .map((t) => t.toLowerCase());
 
-    return uniqueTags;
+  return Array.from(new Set(parts));
 }
